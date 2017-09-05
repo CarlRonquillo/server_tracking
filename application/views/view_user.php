@@ -1,7 +1,7 @@
 <?php include('header.php'); ?>
 	<div class="container-fluid">
 		<div class="col-md-12">
-			<center><h2><?php echo "Other Users of Host Server: <strong>".$record->HostServerName."</strong>"?></h2></center><hr>
+			<center><h2><?php echo "Other Users of Host Server: <strong>". anchor("home/index",$record->HostServerName). "</strong>"?></h2></center><hr>
 			<?php 
 			if($error = $this->session->flashdata('response')):
 			{						

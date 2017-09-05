@@ -18,17 +18,19 @@
 					endif
 				?>
 
-				<div class="form-group">
-					<label for="FK_HostServerID" class="control-label">Host Server Name</label>
-					<?php
-						$hosts = array();
-						foreach($hostCodes as $hostCode)
-						{
-							$hosts[$hostCode->HostServerId]=$hostCode->HostServerName;
-						}
-					echo form_dropdown(['name' => 'FK_HostServerID', 'class' => 'form-control',
-						'autocomplete' => 'on'],$hosts,$record->FK_HostServerId); ?>
-					<span> <?php echo form_error('FK_HostServerID') ?> </span>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="FK_HostServerID" class="control-label">Host Server Name</label>
+						<?php
+							$hosts = array();
+							foreach($hostCodes as $hostCode)
+							{
+								$hosts[$hostCode->HostServerId]=$hostCode->HostServerName;
+							}
+						echo form_dropdown(['name' => 'FK_HostServerID', 'class' => 'form-control',
+							'autocomplete' => 'on'],$hosts,$record->FK_HostServerId); ?>
+						<span> <?php echo form_error('FK_HostServerID') ?> </span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="Title" class="control-label">Title</label>

@@ -17,11 +17,20 @@
 			return $this->db->count_all_results();
 		}
 
-		public function getRecords($limit,$offset)
+		public function getRecords($showAll)
 		{
-			$this->db->limit($limit,$offset);
+			if($showAll)
+			{
+				$where = array('Active' => 1);
+			}
+			else
+			{
+				$where = array('Active' => 1,'ActiveStatus' => 'Active');
+			}
+
+			//$this->db->limit($limit,$offset);
 			$this->db->order_by('HostServerName', 'ASC');
-			$query = $this->db->get_where('hostserver', array('Active' => 1));
+			$query = $this->db->get_where('hostserver', $where);
 			return $query->result();
 		}
 
@@ -128,6 +137,7 @@
 			$this->db->select('*');
 			$this->db->like('HostServerName',$searched_item);
 			$this->db->or_like('CommonName',$searched_item);
+			$this->db->or_like('Purpose',$searched_item);
 			$query = $this->db->get_where('hostserver', array('Active' => 1));
 			if($query->num_rows() > 0)
 			{
@@ -148,6 +158,8 @@
 		{
 			$this->db->select('*');
 			$this->db->like('WebServerName',$searched_item);
+			$this->db->or_like('CommonName',$searched_item);
+			$this->db->or_like('Purpose',$searched_item);
 			$query = $this->db->get_where('webserver', array('Active' => 1,'FK_HostServerID' => $hostID));
 			if($query->num_rows() > 0)
 			{

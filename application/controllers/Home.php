@@ -5,11 +5,25 @@
 		{
 			$this->load->library('pagination');
 			$this->load->model('CrudModel');
-			$config = $this->pagination_config(base_url().'index.php/home/index',$this->CrudModel->count_hosts(),5);
+			//$config = $this->pagination_config(base_url().'index.php/home/index',$this->CrudModel->count_hosts(),5);
 
-			$this->pagination->initialize($config);
-			$data['records']= $this->CrudModel->getRecords($config['per_page'],$this->uri->segment(3));
+			//$this->pagination->initialize($config);
+			$data['records']= $this->CrudModel->getRecords(0);
 			$data['links'] = $this->pagination->create_links();
+			$data['showAll'] = 0;
+			$this->load->view('home',$data);
+		}
+
+		public function show_all()
+		{
+			$this->load->library('pagination');
+			$this->load->model('CrudModel');
+			//$config = $this->pagination_config(base_url().'index.php/home/index',$this->CrudModel->count_hosts(),5);
+
+			//$this->pagination->initialize($config);
+			$data['records']= $this->CrudModel->getRecords(1);
+			$data['links'] = $this->pagination->create_links();
+			$data['showAll'] = 1;
 			$this->load->view('home',$data);
 		}
 
@@ -141,11 +155,13 @@
 		public function search()
 		{
 			$this->load->model('CrudModel');
-			$searched_item = $this->input->post('search');
+			$searched_item = $this->input->post('searchBar');
+			$checkValue =  $this->input->post('ShowAll');
 
 			if(isset($searched_item) and !empty($searched_item))
 			{
 				$data['links'] = '';
+				$data['showAll'] = $checkValue;
 				$data['records'] = $this->CrudModel->search($searched_item);
 				$this->load->view('home',$data);
 			}
@@ -203,6 +219,8 @@
 		public function add_host()
 		{
 			$this->load->model('CrudModel');
+			$data['ActiveStatus'] = $this->CrudModel->getList('ActiveStatus');
+            $data['Locations'] = $this->CrudModel->getList('Locations');
 			$data['OSs'] = $this->CrudModel->getList('OS');
 			$data['Databases'] = $this->CrudModel->getList('Database');
 			$data['TechWebserverTypes'] = $this->CrudModel->getList('TechWebserverType');
@@ -268,10 +286,31 @@
 		{
 			$this->form_validation->set_rules('HostServerName','Host Server Name','required');
 			$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+			$this->load->model('CrudModel');
 			if ($this->form_validation->run())
             {
             	$data = $this->input->post();
-                $this->load->model('CrudModel');
+
+            	if(empty($_POST['TechWebserver']))
+            	{
+            		$data['TechWebserver'] = 0;
+            	}
+
+            	if(empty($_POST['TechJava']))
+            	{
+            		$data['TechJava'] = 0;
+            	}
+
+            	if(empty($_POST['TechPHP']))
+            	{
+            		$data['TechPHP'] = 0;
+            	}
+            	
+				if(empty($_POST['TechRuby']))
+            	{
+            		$data['TechRuby'] = 0;
+            	}
+
                 if($this->CrudModel->saveRecord($data,'hostserver'))
                 {
                 	$this->session->set_flashdata('response','Host server successfully saved.');
@@ -282,7 +321,15 @@
                 }
                 //return redirect('home/add_host');
             }
-            $this->load->view('add_host');
+            $data['ActiveStatus'] = $this->CrudModel->getList('ActiveStatus');
+            $data['Locations'] = $this->CrudModel->getList('Locations');
+			$data['OSs'] = $this->CrudModel->getList('OS');
+			$data['Databases'] = $this->CrudModel->getList('Database');
+			$data['TechWebserverTypes'] = $this->CrudModel->getList('TechWebserverType');
+			$data['VirtualPhysicals'] = $this->CrudModel->getList('VirtualPhysical');
+			$data['ISPConfigInstalleds'] = $this->CrudModel->getList('ISPConfigInstalled');
+			$data['MailEnableds'] = $this->CrudModel->getList('MailEnabled');
+			$this->load->view('add_host',$data);
 		}
 
 		public function save_web($hostID)
@@ -291,6 +338,7 @@
 			$this->form_validation->set_rules('FK_HostServerID','Host Server Name','required');
 			$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
             $data = $this->input->post();
+            $pass_data['HostServerId'] = $data['FK_HostServerID'];
             $this->load->model('CrudModel');
 			if ($this->form_validation->run())
             {
@@ -303,8 +351,9 @@
 					$this->session->set_flashdata('response',$data['WebServerName'].' was Not Saved!');
                 }
             }
-            $records= $this->CrudModel->hostCode();
-            $this->load->view('add_web',['records'=>$records,'HostServerId' => $data['FK_HostServerID']]);
+            $pass_data['records'] = $this->CrudModel->hostCode();
+            $pass_data['CMSs'] = $this->CrudModel->getList('CMS');
+            $this->load->view('add_web',$pass_data);
 		}
 
 		public function save_updatelog()
@@ -444,16 +493,26 @@
 		public function edit_host($hostID)
 		{
 			$this->load->model('CrudModel');
-			$record = $this->CrudModel->getAllRecords( $hostID,'hostserver','HostServerId');
-			$this->load->view('update_host',['record'=>$record]);
+			$data['Locations'] = $this->CrudModel->getList('Locations');
+			$data['ActiveStatus'] = $this->CrudModel->getList('ActiveStatus');
+			$data['OSs'] = $this->CrudModel->getList('OS');
+			$data['Databases'] = $this->CrudModel->getList('Database');
+			$data['TechWebserverTypes'] = $this->CrudModel->getList('TechWebserverType');
+			$data['VirtualPhysicals'] = $this->CrudModel->getList('VirtualPhysical');
+			$data['ISPConfigInstalleds'] = $this->CrudModel->getList('ISPConfigInstalled');
+			$data['MailEnableds'] = $this->CrudModel->getList('MailEnabled');
+			$data['record'] = $this->CrudModel->getAllRecords( $hostID,'hostserver','HostServerId');
+			$this->load->view('update_host',$data);
 		}
 
 		public function edit_web($record_id)
 		{
 			$this->load->model('CrudModel');
-			$record = $this->CrudModel->getAllRecords( $record_id,'webserver','WebServerId');
-			$hostCode= $this->CrudModel->hostCode();
-			$this->load->view('update_web',['record'=>$record,'hostCodes' => $hostCode]);
+			$data['record'] = $this->CrudModel->getAllRecords( $record_id,'webserver','WebServerId');
+			$data['hostCodes']= $this->CrudModel->hostCode();
+			$data['records']= $this->CrudModel->hostCode();
+			$data['CMSs'] = $this->CrudModel->getList('CMS');
+			$this->load->view('update_web',$data);
 		}
 
 		public function edit_updatelog($record_id)
@@ -495,6 +554,28 @@
 			if ($this->form_validation->run())
             {
             	$data = $this->input->post();
+
+            	if(empty($_POST['TechWebserver']))
+            	{
+            		$data['TechWebserver'] = 0;
+            	}
+
+            	if(empty($_POST['TechJava']))
+            	{
+            		$data['TechJava'] = 0;
+            	}
+
+            	if(empty($_POST['TechPHP']))
+            	{
+            		$data['TechPHP'] = 0;
+            	}
+
+				if(empty($_POST['TechRuby']))
+            	{
+            		$data['TechRuby'] = 0;
+            	}
+
+
                 $this->load->model('CrudModel');
                 if($this->CrudModel->updateRecord( $record_id,$data,'hostserver','HostServerId'))
                 {

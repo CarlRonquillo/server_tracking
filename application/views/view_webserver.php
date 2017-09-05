@@ -13,16 +13,16 @@
 				endif
 				?>
 		<div class="col-md-12">
-			<center><h2><?php echo "Web Servers of Host Server: <strong>".$record->HostServerName."</strong>"?></h2></center><hr>
+			<center><h2><?php echo "Sites of Host Server: <strong>". anchor("home/index",$record->HostServerName). "</strong>"?></h2></center><hr>
 			<div class="row">
-				<div class="col-xs-2">
-					<?php echo anchor("home/add_web/{$record->HostServerId}","Add Web Server",["class"=>"btn btn-default"]); ?>
+				<div class="col-xs-1">
+					<?php echo anchor("home/add_web/{$record->HostServerId}","Add Site",["class"=>"btn btn-default"]); ?>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-5">
 					<?php echo form_open("home/search_web/{$record->HostServerId}",['class' => 'form-horizontal','method' => 'post']); ?>
 				    	<div class="input-group">
 					    	<?php echo form_input(['type' => 'text','name' => 'search','id' => 'search', 'class' => 'form-control',
-										'autocomplete' => 'on', 'placeholder' => 'Search Web Server Name']); ?>
+										'autocomplete' => 'on', 'placeholder' => 'Lookup']); ?>
 					      	<span class="input-group-btn">
 					        	<?php echo form_button(['type' => 'submit','class' => 'btn btn-default','name' => 'submit','content' => "<span class='btn-label'><i class='glyphicon glyphicon-search'></i></span>"]); ?>
 					      	</span>
@@ -34,8 +34,9 @@
 			<table class="table table-striped">
 			 	<thead>
 			  	<tr>
-				    <th>Web Server Name</th>
+				    <th>Site Name</th>
 				    <th>Common Name</th>
+				    <th>Purpose</th>
 				    <th>Update Log</th>
 				    <th>Other Users</th>
 				    <th>Delete</th>
@@ -52,12 +53,13 @@
 					   		?>
 						    	<td><?php echo anchor("home/edit_web/{$webserver->WebServerId}",$webserver->WebServerName) ?></td>
 						    	<td><?php echo $webserver->CommonName; ?></td>
+						    	<td><?php echo $webserver->Purpose; ?></td>
 						    	<td><?php echo anchor("home/view_web_updatelogs/{$webserver->WebServerId}","{$logsCount} <i class='glyphicon glyphicon-file'></i>",["class"=>"btn btn-default"]); ?></td>
 						    	<td><?php echo anchor("home/view_web_users/{$webserver->WebServerId}","{$usersCount} <i class='glyphicon glyphicon-user'></i>",["class"=>"btn btn-default"]); ?></td>
 						    	<td><?php echo anchor("home/delete/{$webserver->WebServerId}/webserver/WebServerId/FK_HostServerID","<i class='glyphicon glyphicon-remove'></i>",["class"=>"btn btn-danger","onclick" => "return confirm('Are you sure you want delete?')"]); ?></td>
 						    </tr>
 						<?php } else: ?>
-						<td>No WebServer(s) Found!</td>
+						<td>No Site(s) Found!</td>
 					<?php endif; ?>
 			  	</tbody>
 			</table>

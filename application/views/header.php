@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title>Server Tracking System</title>
   <link rel="stylesheet" href="<?php echo base_url("resources/css/bootstrap.css"); ?>"/>
 	<link rel="stylesheet" href="<?php echo base_url("resources/css/bootstrap.min.css"); ?>"/>
+  <link rel="stylesheet" href="<?php echo base_url("resources/css/jquery.bdt.css"); ?>"/>
 
 </head>
 <body>

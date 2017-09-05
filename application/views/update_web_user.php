@@ -1,10 +1,9 @@
 <?php include('header.php'); ?>
 
 	<div class="container">
-		<div style ="width:500px;margin:auto;">
+					<center><h2>Edit Site Update Log</h2></center><hr>
+		<div style ="width:250px;margin:auto;">
 			<?php echo form_open("home/update_web_user/$record->OtherUsersID/{$record->FK_WebServerID}",['class' => 'form-horizontal']); ?>
-				<center><h2>Edit Web Server Update Log</h2></center>
-				<hr/>
 				<?php 
 					if($error = $this->session->flashdata('response')):
 					{						
@@ -19,7 +18,7 @@
 				?>
 
 				<div class="form-group">
-					<label for="FK_WebServerID" class="control-label">Web Server Name</label>
+					<label for="FK_WebServerID" class="control-label">Site Name</label>
 					<?php
 						$webs = array();
 						foreach($webCodes as $webCode)
@@ -55,7 +54,7 @@
 				</div>
 				<div class="form-group">
 					<?php echo form_submit(['value' => 'Save','class' => 'btn btn-primary']); ?>
-					&nbsp;&nbsp; <?php echo anchor("home/index","View List"); ?>
+					&nbsp;&nbsp; <?php echo anchor("home/view_web_users/{$record->FK_WebServerID}","View List"); ?>
 				</div>
 				<hr/>
 			<?php echo form_close(); ?>

@@ -18,30 +18,35 @@
 					}
 					endif
 				?>
-
-				<div class="form-group">
-					<label for="FK_HostServerId" class="control-label">Host Server Name</label>
-					<?php
-						$hosts = array();
-						foreach($records as $record)
-						{
-							$hosts[$record->HostServerId]=$record->HostServerName;
-						}
-					echo form_dropdown(['name' => 'FK_HostServerId', 'class' => 'form-control',
-						'autocomplete' => 'on'],$hosts,$HostServerId); ?>
-					<span> <?php echo form_error('FK_HostServerId') ?> </span>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="FK_HostServerId" class="control-label">Host Server Name</label>
+						<?php
+							$hosts = array();
+							foreach($records as $record)
+							{
+								$hosts[$record->HostServerId]=$record->HostServerName;
+							}
+						echo form_dropdown(['name' => 'FK_HostServerId', 'class' => 'form-control',
+							'autocomplete' => 'on'],$hosts,$HostServerId); ?>
+						<span> <?php echo form_error('FK_HostServerId') ?> </span>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="Title" class="control-label">Title</label>
-					<?php echo form_input(['type' => 'text','name' => 'Title', 'class' => 'form-control',
-						'autocomplete' => 'off', 'value' => set_value('Title'),'maxlength' => 50]); ?>
-					<span> <?php echo form_error('Title') ?> </span>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="Title" class="control-label">Title</label>
+						<?php echo form_input(['type' => 'text','name' => 'Title', 'class' => 'form-control',
+							'autocomplete' => 'off', 'value' => set_value('Title'),'maxlength' => 50]); ?>
+						<span> <?php echo form_error('Title') ?> </span>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="Notes" class="control-label">Notes</label>
-					<?php echo form_textarea(['type' => 'text','name' => 'Notes', 'class' => 'form-control',
-						'autocomplete' => 'on', 'value' => set_value('Notes')]); ?>
-					<span> <?php echo form_error('Notes') ?> </span>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="Notes" class="control-label">Notes</label>
+						<?php echo form_textarea(['type' => 'text','name' => 'Notes', 'class' => 'form-control',
+							'autocomplete' => 'on', 'value' => set_value('Notes')]); ?>
+						<span> <?php echo form_error('Notes') ?> </span>
+					</div>
 				</div>
 				<div class="form-group">
 					<?php echo form_submit(['value' => 'Save','class' => 'btn btn-primary']); ?>

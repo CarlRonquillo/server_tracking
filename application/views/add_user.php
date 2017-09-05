@@ -1,10 +1,9 @@
 <?php include('header.php'); ?>
 
 	<div class="container">
-		<div style ="width:500px;margin:auto;">
+		<div style ="width:250px;margin:auto;">
+			<center><h2>Add Host Server Other User</h2></center><hr>
 			<?php echo form_open('home/save_user',['class' => 'form-horizontal']); ?>
-				<center><h2>Add Host Server Other User</h2></center>
-				<hr/>
 				<?php 
 					if($error = $this->session->flashdata('response')):
 					{						
@@ -18,7 +17,6 @@
 					}
 					endif
 				?>
-
 				<div class="form-group">
 					<label for="FK_HostServerID" class="control-label">Host Server Name</label>
 					<?php

@@ -1,10 +1,9 @@
 <?php include('header.php'); ?>
 
 	<div class="container">
-		<div style ="width:500px;margin:auto;">
+		<center><h2>Edit Host Server Update Log</h2></center><hr>
+		<div style ="width:250px;margin:auto;">
 			<?php echo form_open("home/update_user/$record->OtherUsersID/{$record->FK_HostServerId}",['class' => 'form-horizontal']); ?>
-				<center><h2>Edit Host Server Update Log</h2></center>
-				<hr/>
 				<?php 
 					if($error = $this->session->flashdata('response')):
 					{						

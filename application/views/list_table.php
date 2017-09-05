@@ -16,7 +16,7 @@
 						    	<!--<td><?php echo anchor("home/delete/{$list->ListID}/lists/ListID/","<i class='glyphicon glyphicon-remove'></i>",["class"=>"btn btn-danger","onclick" => "return confirm('Are you sure you want delete?')"]); ?></td>-->
 						    </tr>
 						<?php } else: ?>
-						<td>No Product(s) Found!</td>
+						<td>No record(s) Found!</td>
 					<?php endif; ?>
 			  	</tbody>
 			</table>

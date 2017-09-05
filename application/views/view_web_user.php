@@ -1,7 +1,7 @@
 <?php include('header.php'); ?>
 	<div class="container-fluid">
 		<div class="col-md-12">
-			<center><h2><?php echo "Other Users of Web Server: <strong>".$record->WebServerName."</strong>"?></h2></center><hr>
+			<center><h2><?php echo "Other Users of Site: <strong>". anchor("home/view_webserver/{$record->WebServerId}",$record->WebServerName)."</strong>"?></h2></center><hr>
 			<?php 
 			if($error = $this->session->flashdata('response')):
 			{						
