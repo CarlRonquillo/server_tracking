@@ -178,7 +178,7 @@
 							<?php echo form_input(['type' => 'password','name' => 'ISPConfigAdminPassword', 'class' => 'form-control',
 								'autocomplete' => 'off','maxlength' => 255,'aria-describedby' => 'basic-addon2','id' => 'ISPConfigAdminPassword'],$record->ISPConfigAdminPassword); ?>
 							<span class="input-group-btn">
-		        				<button class="btn btn-default" type="button" onclick="show_hidePassword('ISPConfigAdminPassword','ISPConfigAdminPassword_eye')"><i id ="ISPConfigAdminPassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
+		        				<button class="btn btn-default" type="button" id="btnISPConfigAdminPassword" onmousedown="mouseDown('btnISPConfigAdminPassword','ISPConfigAdminPassword')" onmouseup="mouseUp('btnISPConfigAdminPassword','ISPConfigAdminPassword')"><i id ="ISPConfigAdminPassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
 		      				</span>
 							</div>
 							<span> <?php echo form_error('ISPConfigAdminPassword') ?> </span>
@@ -232,7 +232,7 @@
 						<?php echo form_input(['type' => 'password','name' => 'SUPassword', 'class' => 'form-control',
 							'autocomplete' => 'off','maxlength' => 255,'aria-describedby' => 'basic-addon2','id' => 'SUPassword'],$record->SUPassword); ?>
 						<span class="input-group-btn">
-	        				<button class="btn btn-default" type="button" onclick="show_hidePassword('SUPassword','SUPassword_eye')"><i id="SUPassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
+	        				<button class="btn btn-default" type="button" id="btnSUPassword" onmousedown="mouseDown('btnSUPassword','SUPassword')" onmouseup="mouseUp('btnSUPassword','SUPassword')" ><i class='glyphicon glyphicon-eye-open'></i></button>
 	      				</span>
 	      				</div>
 						<span> <?php echo form_error('SUPassword') ?> </span>

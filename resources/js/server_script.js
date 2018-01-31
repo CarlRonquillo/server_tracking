@@ -1,4 +1,3 @@
-
 	function mouseDown(buttonName,fieldName)
 	{
 	    document.getElementById(buttonName).addEventListener("mousedown", function(e){

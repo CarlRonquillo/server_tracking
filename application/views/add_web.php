@@ -102,7 +102,7 @@
 						<?php echo form_input(['type' => 'password','name' => 'ISPAdminPassword', 'class' => 'form-control',
 							'autocomplete' => 'off','id' => 'ISPAdminPassword','aria-describedby' => 'basic-addon2']); ?>
 						<span class="input-group-btn">
-	        				<button class="btn btn-default" type="button" onclick="show_hidePassword('ISPAdminPassword','ISPAdminPassword_eye')"><i id="ISPAdminPassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
+	        				<button class="btn btn-default" type="button" id="btnISPAdminPassword" onmousedown="mouseDown('btnISPAdminPassword','ISPAdminPassword')" onmouseup="mouseUp('btnISPAdminPassword','ISPAdminPassword')"><i class='glyphicon glyphicon-eye-open'></i></button>
 	      				</span>
 						</div>
 						<span> <?php echo form_error('ISPAdminPassword') ?> </span>
@@ -134,7 +134,7 @@
 						<?php echo form_input(['type' => 'password','name' => 'DatabasePassword', 'class' => 'form-control',
 							'autocomplete' => 'off','id' => 'DatabasePassword','aria-describedby' => 'basic-addon2']); ?>
 						<span class="input-group-btn">
-	        				<button class="btn btn-default" type="button" onclick="show_hidePassword('DatabasePassword','DatabasePassword_eye')"><i id="DatabasePassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
+	        				<button class="btn btn-default" type="button" id="eye1" onmousedown="mouseDown('eye1','DatabasePassword')" onmouseup="mouseUp('eye1','DatabasePassword')"><i id="DatabasePassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
 	      				</span>
 						</div>
 						<span> <?php echo form_error('DatabasePassword') ?> </span>
@@ -166,7 +166,7 @@
 						<?php echo form_input(['type' => 'password','name' => 'FTPUserPassword', 'class' => 'form-control',
 							'autocomplete' => 'off','id' => 'FTPUserPassword','aria-describedby' => 'basic-addon2']); ?>
 						<span class="input-group-btn">
-	        				<button class="btn btn-default" type="button" onclick="show_hidePassword('FTPUserPassword','FTPUserPassword_eye')"><i id="FTPUserPassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
+	        				<button class="btn btn-default" type="button" id="eye2" onmousedown="mouseDown('eye2','FTPUserPassword')" onmouseup="mouseUp('eye2','FTPUserPassword')"><i id="FTPUserPassword_eye" class='glyphicon glyphicon-eye-open'></i></button>
 	      				</span>
 						</div>
 						<span> <?php echo form_error('FTPUserPassword') ?> </span>
