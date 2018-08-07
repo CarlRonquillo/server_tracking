@@ -80,6 +80,23 @@
 							'autocomplete' => 'off'],$record->CMSVersion); ?>
 						<span> <?php echo form_error('CMSVersion') ?> </span>
 					</div>
+					<div class="form-group col-md-3" style="margin: auto;">
+						<label for="CMSUsername" class="control-label">CMS Username</label>
+						<?php echo form_input(['type' => 'text','name' => 'CMSUsername', 'class' => 'form-control',
+							'autocomplete' => 'off'],$record->CMSUsername); ?>
+						<span> <?php echo form_error('CMSUsername') ?> </span>
+					</div>
+					<div class="form-group col-md-3" style="margin: auto;">
+						<label for="CMSPassword" class="control-label">CMS Password</label>
+						<div class="input-group">
+							<?php echo form_input(['type' => 'password','name' => 'CMSPassword', 'class' => 'form-control',
+								'autocomplete' => 'off','id' => 'CMSPassword','aria-describedby' => 'basic-addon2'],$record->CMSPassword); ?>
+							<span class="input-group-btn">
+		        				<button class="btn btn-default" type="button" id="btnCMSPassword" onmousedown="mouseDown('btnCMSPassword','CMSPassword')" onmouseup="mouseUp('btnCMSPassword','CMSPassword')"><i class='glyphicon glyphicon-eye-open'></i></button>
+		      				</span>
+						</div>
+						<span> <?php echo form_error('CMSPassword') ?> </span>
+					</div>
 				</div>
 				<hr>
 				<div class="row">
